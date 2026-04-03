@@ -98,7 +98,7 @@ export const CONVERSATIONS_TOOLS: Tool[] = [
     name: 'redact_conversation_part',
     description: 'Redact (hide) a specific part/message in a conversation',
     inputSchema: {
-      type: 'object',
+      type: 'object', required: ['conversationId', 'partId'],
       properties: {
         conversationId: { type: 'string' },
         partId: { type: 'string', description: 'Message part ID to redact' },

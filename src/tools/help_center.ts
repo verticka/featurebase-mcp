@@ -152,7 +152,7 @@ export const HELP_CENTER_TOOLS: Tool[] = [
     name: 'create_redirect_rule',
     description: 'Create a URL redirect rule',
     inputSchema: {
-      type: 'object',
+      type: 'object', required: ['from', 'to'],
       properties: {
         from: { type: 'string', description: 'Source URL path' },
         to: { type: 'string', description: 'Destination URL path' },
