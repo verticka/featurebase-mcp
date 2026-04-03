@@ -28,14 +28,17 @@ export class FeaturebaseClient {
 
   private async request<T>(method: HttpMethod, path: string, params?: Record<string, string>, body?: unknown): Promise<T> {
     const url = this.buildUrl(path, params);
+    const headers: Record<string, string> = {
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Featurebase-Version': API_VERSION,
+      'Accept': 'application/json',
+    };
+    if (body !== undefined) {
+      headers['Content-Type'] = 'application/json';
+    }
     const options: RequestInit = {
       method,
-      headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Featurebase-Version': API_VERSION,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
+      headers,
     };
     if (body !== undefined) {
       options.body = JSON.stringify(body);
