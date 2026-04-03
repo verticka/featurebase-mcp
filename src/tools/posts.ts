@@ -149,8 +149,10 @@ export async function handlePosts(
         const { id, ...body } = args;
         return responseOk(await client.post(`/v2/posts/${id}/voters`, body));
       }
-      case 'remove_post_voter':
-        return responseOk(await client.delete(`/v2/posts/${args.id}/voters`));
+      case 'remove_post_voter': {
+        const { id, ...body } = args;
+        return responseOk(await client.delete(`/v2/posts/${id}/voters`, Object.keys(body).length ? body : undefined));
+      }
       default:
         return responseError(`Unknown tool: ${name}`);
     }

@@ -48,4 +48,16 @@ describe('handlePosts', () => {
     await handlePosts('add_post_voter', { id: 'p1', userId: 'u1' }, mockClient);
     expect(mockClient.post).toHaveBeenCalledWith('/v2/posts/p1/voters', { userId: 'u1' });
   });
+
+  it('list_post_voters calls GET /v2/posts/:id/voters', async () => {
+    mockClient.get = vi.fn().mockResolvedValue({ data: [] });
+    await handlePosts('list_post_voters', { id: 'p1', limit: 10 }, mockClient);
+    expect(mockClient.get).toHaveBeenCalledWith('/v2/posts/p1/voters', { limit: '10' });
+  });
+
+  it('remove_post_voter calls DELETE /v2/posts/:id/voters', async () => {
+    mockClient.delete = vi.fn().mockResolvedValue({});
+    await handlePosts('remove_post_voter', { id: 'p1', userId: 'u1' }, mockClient);
+    expect(mockClient.delete).toHaveBeenCalledWith('/v2/posts/p1/voters', expect.objectContaining({ userId: 'u1' }));
+  });
 });
