@@ -214,18 +214,16 @@ export async function handleHelpCenter(
     switch (name) {
       // Help Centers
       case 'list_help_centers':
-        return responseOk(await client.get('/v2/help_center/help_centers', {}));
+        return responseOk(await client.get('/v2/help_center/help_centers'));
       case 'get_help_center':
-        return responseOk(await client.get(`/v2/help_center/help_centers/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/help_center/help_centers/${args.id}`));
       // Collections
       case 'list_collections':
         return responseOk(await client.get('/v2/help_center/collections', buildParams(args, ['helpCenterId', 'limit', 'cursor'])));
-      case 'create_collection': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/help_center/collections', body));
-      }
+      case 'create_collection':
+        return responseOk(await client.post('/v2/help_center/collections', args));
       case 'get_collection':
-        return responseOk(await client.get(`/v2/help_center/collections/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/help_center/collections/${args.id}`));
       case 'update_collection': {
         const { id, ...body } = args;
         return responseOk(await client.patch(`/v2/help_center/collections/${id}`, body));
@@ -235,12 +233,10 @@ export async function handleHelpCenter(
       // Articles
       case 'list_articles':
         return responseOk(await client.get('/v2/help_center/articles', buildParams(args, ['helpCenterId', 'parentId', 'state', 'limit', 'cursor'])));
-      case 'create_article': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/help_center/articles', body));
-      }
+      case 'create_article':
+        return responseOk(await client.post('/v2/help_center/articles', args));
       case 'get_article':
-        return responseOk(await client.get(`/v2/help_center/articles/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/help_center/articles/${args.id}`));
       case 'update_article': {
         const { id, ...body } = args;
         return responseOk(await client.patch(`/v2/help_center/articles/${id}`, body));
@@ -250,12 +246,10 @@ export async function handleHelpCenter(
       // Redirect Rules
       case 'list_redirect_rules':
         return responseOk(await client.get('/v2/help_center/redirect_rules', buildParams(args, ['limit', 'cursor'])));
-      case 'create_redirect_rule': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/help_center/redirect_rules', body));
-      }
+      case 'create_redirect_rule':
+        return responseOk(await client.post('/v2/help_center/redirect_rules', args));
       case 'get_redirect_rule':
-        return responseOk(await client.get(`/v2/help_center/redirect_rules/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/help_center/redirect_rules/${args.id}`));
       case 'get_redirect_rule_by_url':
         return responseOk(await client.get('/v2/help_center/redirect_rules/by-url', buildParams(args, ['url'])));
       case 'update_redirect_rule': {

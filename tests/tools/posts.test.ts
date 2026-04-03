@@ -28,7 +28,7 @@ describe('handlePosts', () => {
   it('get_post calls GET /v2/posts/:id', async () => {
     mockClient.get = vi.fn().mockResolvedValue({ id: 'p1' });
     await handlePosts('get_post', { id: 'p1' }, mockClient);
-    expect(mockClient.get).toHaveBeenCalledWith('/v2/posts/p1', {});
+    expect(mockClient.get).toHaveBeenCalledWith('/v2/posts/p1');
   });
 
   it('update_post calls PATCH /v2/posts/:id', async () => {

@@ -70,13 +70,11 @@ export async function handleWebhooks(
   try {
     switch (name) {
       case 'list_webhooks':
-        return responseOk(await client.get('/v2/webhooks', {}));
-      case 'create_webhook': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/webhooks', body));
-      }
+        return responseOk(await client.get('/v2/webhooks'));
+      case 'create_webhook':
+        return responseOk(await client.post('/v2/webhooks', args));
       case 'get_webhook':
-        return responseOk(await client.get(`/v2/webhooks/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/webhooks/${args.id}`));
       case 'update_webhook': {
         const { id, ...body } = args;
         return responseOk(await client.patch(`/v2/webhooks/${id}`, body));
@@ -84,7 +82,7 @@ export async function handleWebhooks(
       case 'delete_webhook':
         return responseOk(await client.delete(`/v2/webhooks/${args.id}`));
       case 'refresh_webhook_secret':
-        return responseOk(await client.post(`/v2/webhooks/${args.id}/secret`, {}));
+        return responseOk(await client.post(`/v2/webhooks/${args.id}/secret`));
       default:
         return responseError(`Unknown tool: ${name}`);
     }

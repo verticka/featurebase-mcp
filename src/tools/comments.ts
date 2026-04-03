@@ -82,12 +82,10 @@ export async function handleComments(
     switch (name) {
       case 'list_comments':
         return responseOk(await client.get('/v2/comments', buildParams(args, ['postId', 'changelogId', 'privacy', 'inReview', 'sortBy', 'limit', 'cursor'])));
-      case 'create_comment': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/comments', body));
-      }
+      case 'create_comment':
+        return responseOk(await client.post('/v2/comments', args));
       case 'get_comment':
-        return responseOk(await client.get(`/v2/comments/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/comments/${args.id}`));
       case 'update_comment': {
         const { id, ...body } = args;
         return responseOk(await client.patch(`/v2/comments/${id}`, body));

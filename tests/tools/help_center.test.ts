@@ -16,7 +16,7 @@ describe('handleHelpCenter', () => {
   it('list_help_centers calls GET /v2/help_center/help_centers', async () => {
     mockClient.get = vi.fn().mockResolvedValue({ data: [] });
     await handleHelpCenter('list_help_centers', {}, mockClient);
-    expect(mockClient.get).toHaveBeenCalledWith('/v2/help_center/help_centers', {});
+    expect(mockClient.get).toHaveBeenCalledWith('/v2/help_center/help_centers');
   });
 
   it('create_article calls POST /v2/help_center/articles', async () => {

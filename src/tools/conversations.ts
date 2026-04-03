@@ -124,12 +124,10 @@ export async function handleConversations(
     switch (name) {
       case 'list_conversations':
         return responseOk(await client.get('/v2/conversations', buildParams(args, ['limit', 'cursor'])));
-      case 'create_conversation': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/conversations', body));
-      }
+      case 'create_conversation':
+        return responseOk(await client.post('/v2/conversations', args));
       case 'get_conversation':
-        return responseOk(await client.get(`/v2/conversations/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/conversations/${args.id}`));
       case 'update_conversation': {
         const { id, ...body } = args;
         return responseOk(await client.patch(`/v2/conversations/${id}`, body));
@@ -148,10 +146,8 @@ export async function handleConversations(
         const { id, ...body } = args;
         return responseOk(await client.delete(`/v2/conversations/${id}/participants`, Object.keys(body).length ? body : undefined));
       }
-      case 'redact_conversation_part': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/conversations/redact', body));
-      }
+      case 'redact_conversation_part':
+        return responseOk(await client.post('/v2/conversations/redact', args));
       default:
         return responseError(`Unknown tool: ${name}`);
     }

@@ -28,7 +28,7 @@ describe('handleCompanies', () => {
   it('get_company calls GET /v2/companies/:id', async () => {
     mockClient.get = vi.fn().mockResolvedValue({ id: 'co1' });
     await handleCompanies('get_company', { id: 'co1' }, mockClient);
-    expect(mockClient.get).toHaveBeenCalledWith('/v2/companies/co1', {});
+    expect(mockClient.get).toHaveBeenCalledWith('/v2/companies/co1');
   });
 
   it('delete_company calls DELETE /v2/companies/:id', async () => {

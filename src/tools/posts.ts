@@ -131,12 +131,10 @@ export async function handlePosts(
     switch (name) {
       case 'list_posts':
         return responseOk(await client.get('/v2/posts', buildParams(args, ['boardId', 'statusId', 'q', 'tags', 'sortBy', 'sortOrder', 'inReview', 'limit', 'cursor'])));
-      case 'create_post': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/posts', body));
-      }
+      case 'create_post':
+        return responseOk(await client.post('/v2/posts', args));
       case 'get_post':
-        return responseOk(await client.get(`/v2/posts/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/posts/${args.id}`));
       case 'update_post': {
         const { id, ...body } = args;
         return responseOk(await client.patch(`/v2/posts/${id}`, body));

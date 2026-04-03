@@ -103,22 +103,20 @@ export async function handleContacts(
     switch (name) {
       case 'list_contacts':
         return responseOk(await client.get('/v2/contacts', buildParams(args, ['limit', 'cursor', 'contactType'])));
-      case 'create_or_update_contact': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/contacts', body));
-      }
+      case 'create_or_update_contact':
+        return responseOk(await client.post('/v2/contacts', args));
       case 'get_contact':
-        return responseOk(await client.get(`/v2/contacts/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/contacts/${args.id}`));
       case 'delete_contact':
         return responseOk(await client.delete(`/v2/contacts/${args.id}`));
       case 'get_contact_by_user_id':
-        return responseOk(await client.get(`/v2/contacts/by-user-id/${args.userId}`, {}));
+        return responseOk(await client.get(`/v2/contacts/by-user-id/${args.userId}`));
       case 'delete_contact_by_user_id':
         return responseOk(await client.delete(`/v2/contacts/by-user-id/${args.userId}`));
       case 'block_contact':
-        return responseOk(await client.post(`/v2/contacts/${args.id}/block`, {}));
+        return responseOk(await client.post(`/v2/contacts/${args.id}/block`));
       case 'unblock_contact':
-        return responseOk(await client.post(`/v2/contacts/${args.id}/unblock`, {}));
+        return responseOk(await client.post(`/v2/contacts/${args.id}/unblock`));
       default:
         return responseError(`Unknown tool: ${name}`);
     }

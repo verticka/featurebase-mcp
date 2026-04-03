@@ -34,7 +34,7 @@ describe('handleChangelogs', () => {
   it('unpublish_changelog calls POST /v2/changelogs/:id/unpublish', async () => {
     mockClient.post = vi.fn().mockResolvedValue({});
     await handleChangelogs('unpublish_changelog', { id: 'c1' }, mockClient);
-    expect(mockClient.post).toHaveBeenCalledWith('/v2/changelogs/c1/unpublish', {});
+    expect(mockClient.post).toHaveBeenCalledWith('/v2/changelogs/c1/unpublish');
   });
 
   it('add_changelog_subscribers calls POST /v2/changelogs/subscribers', async () => {
@@ -58,7 +58,7 @@ describe('handleChangelogs', () => {
   it('get_changelog calls GET /v2/changelogs/:id', async () => {
     mockClient.get = vi.fn().mockResolvedValue({ id: 'c1' });
     await handleChangelogs('get_changelog', { id: 'c1' }, mockClient);
-    expect(mockClient.get).toHaveBeenCalledWith('/v2/changelogs/c1', {});
+    expect(mockClient.get).toHaveBeenCalledWith('/v2/changelogs/c1');
   });
 
   it('remove_changelog_subscribers calls DELETE /v2/changelogs/subscribers with body', async () => {

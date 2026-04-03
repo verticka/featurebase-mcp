@@ -110,12 +110,10 @@ export async function handleCompanies(
     switch (name) {
       case 'list_companies':
         return responseOk(await client.get('/v2/companies', buildParams(args, ['limit', 'cursor'])));
-      case 'create_or_update_company': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/companies', body));
-      }
+      case 'create_or_update_company':
+        return responseOk(await client.post('/v2/companies', args));
       case 'get_company':
-        return responseOk(await client.get(`/v2/companies/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/companies/${args.id}`));
       case 'delete_company':
         return responseOk(await client.delete(`/v2/companies/${args.id}`));
       case 'delete_company_by_company_id':

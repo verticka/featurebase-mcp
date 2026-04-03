@@ -133,12 +133,10 @@ export async function handleChangelogs(
     switch (name) {
       case 'list_changelogs':
         return responseOk(await client.get('/v2/changelogs', buildParams(args, ['q', 'state', 'categories', 'locale', 'startDate', 'endDate', 'sortBy', 'limit', 'cursor'])));
-      case 'create_changelog': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/changelogs', body));
-      }
+      case 'create_changelog':
+        return responseOk(await client.post('/v2/changelogs', args));
       case 'get_changelog':
-        return responseOk(await client.get(`/v2/changelogs/${args.id}`, {}));
+        return responseOk(await client.get(`/v2/changelogs/${args.id}`));
       case 'update_changelog': {
         const { id, ...body } = args;
         return responseOk(await client.patch(`/v2/changelogs/${id}`, body));
@@ -150,15 +148,11 @@ export async function handleChangelogs(
         return responseOk(await client.post(`/v2/changelogs/${id}/publish`, body));
       }
       case 'unpublish_changelog':
-        return responseOk(await client.post(`/v2/changelogs/${args.id}/unpublish`, {}));
-      case 'add_changelog_subscribers': {
-        const { ...body } = args;
-        return responseOk(await client.post('/v2/changelogs/subscribers', body));
-      }
-      case 'remove_changelog_subscribers': {
-        const { ...body } = args;
-        return responseOk(await client.delete('/v2/changelogs/subscribers', body));
-      }
+        return responseOk(await client.post(`/v2/changelogs/${args.id}/unpublish`));
+      case 'add_changelog_subscribers':
+        return responseOk(await client.post('/v2/changelogs/subscribers', args));
+      case 'remove_changelog_subscribers':
+        return responseOk(await client.delete('/v2/changelogs/subscribers', args));
       default:
         return responseError(`Unknown tool: ${name}`);
     }
