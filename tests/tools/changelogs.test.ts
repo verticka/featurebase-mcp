@@ -54,4 +54,16 @@ describe('handleChangelogs', () => {
     await handleChangelogs('delete_changelog', { id: 'c1' }, mockClient);
     expect(mockClient.delete).toHaveBeenCalledWith('/v2/changelogs/c1');
   });
+
+  it('get_changelog calls GET /v2/changelogs/:id', async () => {
+    mockClient.get = vi.fn().mockResolvedValue({ id: 'c1' });
+    await handleChangelogs('get_changelog', { id: 'c1' }, mockClient);
+    expect(mockClient.get).toHaveBeenCalledWith('/v2/changelogs/c1', {});
+  });
+
+  it('remove_changelog_subscribers calls DELETE /v2/changelogs/subscribers with body', async () => {
+    mockClient.delete = vi.fn().mockResolvedValue({});
+    await handleChangelogs('remove_changelog_subscribers', { emails: ['a@test.com'] }, mockClient);
+    expect(mockClient.delete).toHaveBeenCalledWith('/v2/changelogs/subscribers', { emails: ['a@test.com'] });
+  });
 });

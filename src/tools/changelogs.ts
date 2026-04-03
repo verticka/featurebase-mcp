@@ -157,7 +157,7 @@ export async function handleChangelogs(
       }
       case 'remove_changelog_subscribers': {
         const { ...body } = args;
-        return responseOk(await client.delete('/v2/changelogs/subscribers', Object.keys(body).length ? body : undefined));
+        return responseOk(await client.delete('/v2/changelogs/subscribers', body));
       }
       default:
         return responseError(`Unknown tool: ${name}`);
